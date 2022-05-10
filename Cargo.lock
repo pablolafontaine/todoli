@@ -276,7 +276,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "todo"
+name = "todoli"
 version = "0.1.0"
 dependencies = [
  "clap",
