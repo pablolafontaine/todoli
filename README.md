@@ -1,5 +1,3 @@
-# Readme todoli CHANGE NAME!!
-
 # todo
 ## A simple CLI tool for keeping track of your tasks.
 
