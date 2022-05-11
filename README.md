@@ -3,7 +3,7 @@
 
 Built in Rust using clap, **todo** allows for todo lists to be created, viewed, and checked off all from the **command line**.
 
-![clipboard.png](4EJ3jMcoM-clipboard.png)
+![example1.png](examples/example1.png)
 
 ## Usage
 ```
@@ -23,7 +23,7 @@ SUBCOMMANDS:
     remove    Removes entry with id from todo list
     urgent    Marks item with id as urgent on todo list
 ```
-
+![example2.png](examples/example2.png)
 
 ## Installation
 Todoli can be installed by building from the latest source using **cargo**.
