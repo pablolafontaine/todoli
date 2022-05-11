@@ -4,26 +4,33 @@ use colored::*;
 use std::fs::File;
 use std::io::prelude::*;
 #[derive(Parser)]
+#[clap(author, version, about, long_about = None)]
 struct Args {
     #[clap(subcommand)]
     command: Option<Action>,
-    #[clap(short, long, default_value = "GLOBAL_LIST")]
+    /// Creates or modifies todo list at specified path
+    #[clap(short, long, default_value = "$HOME/.todo")]
     path: String,
 }
 
 #[derive(clap::Subcommand)]
 enum Action {
-    Add { text: Option<String> },
+    #[clap(about="Adds entry to todo list")]
+    Add { entry: Option<String> },
+    #[clap(about="Removes entry with id from todo list")]
     Remove { id: Option<u32> },
-    Clear,
+    #[clap(about="Removes all entries from todo list")]
+    Clear,    
+    #[clap(about="Marks item with id as done on todo list")]
     Done { id: Option<u32> },
+    #[clap(about="Marks item with id as urgent on todo list")]
     Urgent { id: Option<u32> }
 }
 
 fn main() -> std::io::Result<()> {
     let args = Args::parse();
     let mut path = args.path;
-    if path == "GLOBAL_LIST" {
+    if path == "$HOME/.todo" {
         path = dirs::home_dir().unwrap().display().to_string();
         path.push_str("/.todo");
     }
@@ -33,8 +40,8 @@ fn main() -> std::io::Result<()> {
     };
 
     match &args.command {
-        Some(Action::Add { text }) => {
-            match text {
+        Some(Action::Add { entry }) => {
+            match entry {
                 Some(x) => {
                     match add(file, x.to_string()) {
                         Ok(()) => println!("Successfully added entry."),
